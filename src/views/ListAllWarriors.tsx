@@ -1,7 +1,6 @@
 import React, {FormEvent, useEffect, useState} from 'react';
 import {Spinner} from "../components/common/Spinner/Spinner";
 import {WarriorEntity} from "../types/WariorEntity";
-import trash from '../graphics/trash.png';
 import {WarriorsList} from "../components/Warriors/WarriorsList";
 
 export const ListAllWarriors = () => {

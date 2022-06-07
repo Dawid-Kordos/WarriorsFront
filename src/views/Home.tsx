@@ -1,5 +1,6 @@
 import React from "react";
 import warrior from "../graphics/warrior.jpg";
+import {Link} from "react-router-dom";
 
 export const Home = () => (
   <>
@@ -7,9 +8,9 @@ export const Home = () => (
       <img className="article__img" src={warrior} alt="" />
       <h3 className="article__sub-title">Are you sure you are brave enough for a fight? Add your warrior then with
         certain attributes and test yourself!
-        <a className="article__link" href="/warrior/add-form"> Register a new
+        <Link to="/warrior/add-form" className="article__link"> Register a new
           warrior
-        </a>
+        </Link>
       </h3>
   </>
 );

@@ -1,6 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import {Spinner} from "../components/common/Spinner/Spinner";
 import {WarriorEntity} from "../types/WariorEntity";
+import {Table} from "../components/common/Table/Table";
+
+export const FamousWarriorsContext = createContext<WarriorEntity[] | null>(null);
 
 export const HallOfFame = () => {
     const [data, setData] = useState<WarriorEntity[] | null>(null);
@@ -12,7 +15,9 @@ export const HallOfFame = () => {
     };
 
     useEffect(() => {
-        refreshFameWarriors();
+        (async () => {
+            await refreshFameWarriors();
+        })();
     }, []);
 
 
@@ -23,24 +28,9 @@ export const HallOfFame = () => {
     return (
         <>
             <h1 className="article__title">Hall of fame</h1>
-            <table className="article__table">
-                <thead>
-                <tr className="article__table-row">
-                    <th className="article__table-column">#</th>
-                    <th className="article__table-column">Name</th>
-                    <th className="article__table-column">Wins</th>
-                </tr>
-                </thead>
-                <tbody>
-                {[...data].map(warrior => (
-                    <tr key={warrior.id} className="article__table-row">
-                        <td className="article__table-column">{warrior.place}</td>
-                        <td className="article__table-column">{warrior.name}</td>
-                        <td className="article__table-column">{warrior.wins}</td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
+            <FamousWarriorsContext.Provider value={data}>
+                <Table/>
+            </FamousWarriorsContext.Provider>
         </>
     );
 }

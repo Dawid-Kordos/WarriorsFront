@@ -1,6 +1,6 @@
 import React from "react";
-import warrior from "../graphics/warrior.jpg";
 import {Link} from "react-router-dom";
+import warrior from "../graphics/warrior.jpg";
 
 export const Home = () => (
   <>

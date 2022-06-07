@@ -21,7 +21,7 @@ export const ListAllWarriors = () => {
 
     if (data === null) {
         return <Spinner/>;
-    };
+    }
 
     const handleDelete = async (e: FormEvent, id: string | undefined) => {
         await fetch(`http://localhost:3001/warrior/${id}`, {

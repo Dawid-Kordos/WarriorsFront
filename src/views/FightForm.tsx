@@ -39,6 +39,7 @@ export const FightForm = () => {
                 </select>
                 <button className="article__btn" type="submit">Start your fight!</button>
             </form>
+            <p className="article__paragraph">Fighting routine is not ready yet.</p>
         </>
     );
 };

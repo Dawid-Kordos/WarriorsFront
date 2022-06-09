@@ -4,12 +4,12 @@ import {WarriorEntity} from "../types/WariorEntity";
 import {WarriorsList} from "../components/Warriors/WarriorsList";
 
 export const ListAllWarriors = () => {
-    const [data, setData] = useState<WarriorEntity[] | null>(null);
+    const [warriors, setWarriors] = useState<WarriorEntity[] | null>(null);
 
     const refreshAllWarriors = async () => {
-        setData(null);
+        setWarriors(null);
         const res = await fetch('http://localhost:3001/warrior');
-        setData(await res.json())
+        setWarriors(await res.json())
     };
 
     useEffect(() => {
@@ -19,7 +19,7 @@ export const ListAllWarriors = () => {
     }, []);
 
 
-    if (data === null) {
+    if (warriors === null) {
         return <Spinner/>;
     }
 
@@ -31,15 +31,15 @@ export const ListAllWarriors = () => {
             },
             body: JSON.stringify({id}),
         });
-        //alert('Warrior deleted.');
+
         await refreshAllWarriors();
-    }
+    };
 
     return (
         <>
             <h1 className="article__title">List of all warriors:</h1>
             <ol className="article__list">
-                {[...data].map(warrior => (
+                {[...warriors].map(warrior => (
                     <WarriorsList
                         key={warrior.id}
                         warrior={warrior}

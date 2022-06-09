@@ -6,12 +6,12 @@ import {Table} from "../components/common/Table/Table";
 export const FamousWarriorsContext = createContext<WarriorEntity[] | null>(null);
 
 export const HallOfFame = () => {
-    const [data, setData] = useState<WarriorEntity[] | null>(null);
+    const [famousWarriors, setFamousWarriors] = useState<WarriorEntity[] | null>(null);
 
     const refreshFameWarriors = async () => {
-        setData(null);
+        setFamousWarriors(null);
         const res = await fetch('http://localhost:3001/hall-of-fame');
-        setData(await res.json())
+        setFamousWarriors(await res.json())
     };
 
     useEffect(() => {
@@ -21,14 +21,14 @@ export const HallOfFame = () => {
     }, []);
 
 
-    if (data === null) {
+    if (famousWarriors === null) {
         return <Spinner/>;
     }
 
     return (
         <>
             <h1 className="article__title">Hall of fame</h1>
-            <FamousWarriorsContext.Provider value={data}>
+            <FamousWarriorsContext.Provider value={famousWarriors}>
                 <Table/>
             </FamousWarriorsContext.Provider>
         </>

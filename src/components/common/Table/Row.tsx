@@ -4,11 +4,11 @@ import {FamousWarriorsContext} from "../../../views/HallOfFame";
 export const Row = () => {
     const context = useContext(FamousWarriorsContext);
     if (!context) return null;
-    const data = context;
+    const famousWarriors = context;
 
     return(
         <>
-            {data.map(warrior => (
+            {famousWarriors.map(warrior => (
                 <tr key={warrior.id} className="article__table-row">
                     <td className="article__table-column">{warrior.place}</td>
                     <td className="article__table-column">{warrior.name}</td>

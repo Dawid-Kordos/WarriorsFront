@@ -3,11 +3,7 @@ import {Form} from "../components/Form/Form";
 import {RegistrationData} from "../types/RegistrationData";
 import {registrData} from "../utils/registrData";
 import {ErrorPage} from "./ErrorPage";
-
-interface RegistrationDataContextType {
-    registrationData: RegistrationData;
-    handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
-}
+import {RegistrationDataContextType} from "../types/RegistrationDataContextType";
 
 export const RegistrationDataContext = createContext<RegistrationDataContextType | null>(null);
 
@@ -30,18 +26,17 @@ export const AddForm = () => {
 
     const handleInput = async (e: ChangeEvent<HTMLInputElement>) => {
         const {value, name} = e.target;
-        if (name === 'name') {
+        name === 'name'
+            ?
             setRegistrationData({
                 ...registrationData,
                 name: value,
-            });
-        } else {
-            setRegistrationData({
+            })
+          :  setRegistrationData({
                 ...registrationData,
                 [name]: Number(value),
-            })
-        }
-    }
+            });
+    };
 
     const {power, defence, resistance, agility, name} = registrationData;
     const stats = [power, defence, resistance, agility];
@@ -55,18 +50,13 @@ export const AddForm = () => {
         }
 
         if (sum !== 10) {
-            return <ErrorPage
-                message={`Sum of all properties (power, defence, resistance and agility) must be equal 10, but you have entered ${sum}.`
-                }
-            />
+            return <ErrorPage message={`Sum of all properties (power, defence, resistance and agility) must be equal 10, but you have entered ${sum}.`}/>
         }
 
         if (name.trim().length < 3 || name.length > 50) {
-            return <ErrorPage
-                message={`Name should have at least 3 and at most 50 characters, but you entered ${name.trim().length}.`
-                }
-            />
+            return <ErrorPage message={`Name should have at least 3 and at most 50 characters, but you entered ${name.trim().length}.`}/>
         }
+
         setRegistrationData(registrData);
         setIsSubmitted(false);
     }
@@ -82,5 +72,5 @@ export const AddForm = () => {
                 <Form data={registrationData} onSubmit={handleForm}/>
             </RegistrationDataContext.Provider>
         </>
-    )
-}
+    );
+};

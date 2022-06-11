@@ -5,6 +5,7 @@ interface Props {
     className: string;
     name: string;
     value: number;
+    label: string;
 }
 
 export const InputNumber = (props: Props) => {
@@ -15,6 +16,8 @@ export const InputNumber = (props: Props) => {
 
     return (
         <>
+            <label className="article__label">
+                {props.label}:
             <input
                 className={props.className}
                 type="number"
@@ -24,6 +27,7 @@ export const InputNumber = (props: Props) => {
                 value={props.value}
                 onChange={handleInput}
             />
+            </label>
         </>
     );
 };

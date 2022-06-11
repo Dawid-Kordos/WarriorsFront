@@ -4,25 +4,37 @@ import {RegistrationData} from "../types/RegistrationData";
 import {registrData} from "../utils/registrData";
 import {ErrorPage} from "./ErrorPage";
 import {RegistrationDataContextType} from "../types/RegistrationDataContextType";
+import {Acknowledge} from "./Acknowledge";
 
 export const RegistrationDataContext = createContext<RegistrationDataContextType | null>(null);
 
 export const AddForm = () => {
     const [registrationData, setRegistrationData] = useState<RegistrationData>(registrData);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+    const [addedWarriorName, setAddedWarriorName] = useState<string>('');
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     const handleForm = async (e: FormEvent) => {
         e.preventDefault();
         setIsSubmitted(true);
 
-        await fetch('http://localhost:3001/warrior', {
-            method: "post",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(registrationData),
-        });
-    }
+        try {
+            const res = await fetch('http://localhost:3001/warrior', {
+                method: "post",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(registrationData),
+            });
+
+            const message = await res.json();
+
+            !message.message ? setAddedWarriorName(message.name) : setErrorMessage(message.message);
+        } catch (err) {
+            console.error(err);
+            return <ErrorPage message={'Sorry, try again later.'}/>
+        }
+    };
 
     const handleInput = async (e: ChangeEvent<HTMLInputElement>) => {
         const {value, name} = e.target;
@@ -32,33 +44,23 @@ export const AddForm = () => {
                 ...registrationData,
                 name: value,
             })
-          :  setRegistrationData({
+            : setRegistrationData({
                 ...registrationData,
                 [name]: Number(value),
             });
     };
 
-    const {power, defence, resistance, agility, name} = registrationData;
-    const stats = [power, defence, resistance, agility];
-    const sum = stats.reduce((prev, curr) => prev + curr, 0)
-
     if (isSubmitted) {
-        for (const stat of stats) {
-            if (stat < 1) {
-                return <ErrorPage message={'Each property must have min 1 point.'}/>
-            }
-        }
-
-        if (sum !== 10) {
-            return <ErrorPage message={`Sum of all properties (power, defence, resistance and agility) must be equal 10, but you have entered ${sum}.`}/>
-        }
-
-        if (name.trim().length < 3 || name.length > 50) {
-            return <ErrorPage message={`Name should have at least 3 and at most 50 characters, but you entered ${name.trim().length}.`}/>
-        }
-
         setRegistrationData(registrData);
         setIsSubmitted(false);
+    }
+
+    if (errorMessage) {
+        return <ErrorPage message={errorMessage}/>
+    }
+
+    if (addedWarriorName) {
+        return <Acknowledge name={addedWarriorName}/>
     }
 
     return (

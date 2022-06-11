@@ -13,6 +13,8 @@ export const InputText = (props: Props) => {
 
   return(
       <>
+          <label className="article__label">
+              Name:
           <input
               required
               className={props.className}
@@ -23,6 +25,7 @@ export const InputText = (props: Props) => {
               value={registrationData.name}
               onChange={handleInput}
           />
+          </label>
       </>
   );
 };

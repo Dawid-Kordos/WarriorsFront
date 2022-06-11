@@ -2,14 +2,16 @@ import React, {FormEvent, useEffect, useState} from 'react';
 import {Spinner} from "../components/common/Spinner/Spinner";
 import {WarriorEntity} from "../types/WariorEntity";
 import {WarriorsList} from "../components/Warriors/WarriorsList";
+import {DeleteConfirmation} from "./DeleteConfirmation";
 
 export const ListAllWarriors = () => {
     const [warriors, setWarriors] = useState<WarriorEntity[] | null>(null);
+    const [removedWarriorId, setRemovedWarriorId] = useState<string | undefined>(undefined);
 
     const refreshAllWarriors = async () => {
         setWarriors(null);
         const res = await fetch('http://localhost:3001/warrior');
-        setWarriors(await res.json())
+        setWarriors(await res.json());
     };
 
     useEffect(() => {
@@ -24,6 +26,8 @@ export const ListAllWarriors = () => {
     }
 
     const handleDelete = async (e: FormEvent, id: string | undefined) => {
+        e.preventDefault();
+
         await fetch(`http://localhost:3001/warrior/${id}`, {
             method: "delete",
             headers: {
@@ -32,8 +36,14 @@ export const ListAllWarriors = () => {
             body: JSON.stringify({id}),
         });
 
+        setRemovedWarriorId(id);
+
         await refreshAllWarriors();
     };
+
+    if (removedWarriorId) {
+        return <DeleteConfirmation removedId={removedWarriorId}/>
+    }
 
     return (
         <>

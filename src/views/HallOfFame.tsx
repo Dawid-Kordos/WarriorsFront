@@ -8,10 +8,15 @@ export const FamousWarriorsContext = createContext<WarriorEntity[] | null>(null)
 export const HallOfFame = () => {
     const [famousWarriors, setFamousWarriors] = useState<WarriorEntity[] | null>(null);
 
+
     const refreshFameWarriors = async () => {
-        setFamousWarriors(null);
-        const res = await fetch('http://localhost:3001/hall-of-fame');
-        setFamousWarriors(await res.json())
+        try {
+            setFamousWarriors(null);
+            const res = await fetch('http://localhost:3001/hall-of-fame');
+            setFamousWarriors(await res.json());
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     useEffect(() => {

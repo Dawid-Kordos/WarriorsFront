@@ -3,6 +3,7 @@ import {Spinner} from "../components/common/Spinner/Spinner";
 import {WarriorEntity} from "../types/WariorEntity";
 import {WarriorsList} from "../components/Warriors/WarriorsList";
 import {DeleteConfirmation} from "./DeleteConfirmation";
+import {ErrorPage} from "./ErrorPage";
 
 export const ListAllWarriors = () => {
     const [warriors, setWarriors] = useState<WarriorEntity[] | null>(null);
@@ -28,17 +29,22 @@ export const ListAllWarriors = () => {
     const handleDelete = async (e: FormEvent, id: string | undefined) => {
         e.preventDefault();
 
-        await fetch(`http://localhost:3001/warrior/${id}`, {
-            method: "delete",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({id}),
-        });
+        try {
+            await fetch(`http://localhost:3001/warrior/${id}`, {
+                method: "delete",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({id}),
+            });
 
-        setRemovedWarriorId(id);
+            setRemovedWarriorId(id);
 
-        await refreshAllWarriors();
+            await refreshAllWarriors();
+        } catch (err) {
+            console.error(err);
+            return <ErrorPage message={'Sorry, try again later.'}/>
+        }
     };
 
     if (removedWarriorId) {

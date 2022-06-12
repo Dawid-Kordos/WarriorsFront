@@ -6,6 +6,8 @@ import {ErrorPage} from "./ErrorPage";
 import {RegistrationDataContextType} from "../types/RegistrationDataContextType";
 import {Acknowledge} from "./Acknowledge";
 
+import './AddForm.css';
+
 export const RegistrationDataContext = createContext<RegistrationDataContextType | null>(null);
 
 export const AddForm = () => {

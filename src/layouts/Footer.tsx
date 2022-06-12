@@ -1,6 +1,8 @@
 import React from "react";
 import logoBottom from "../graphics/logo1.png";
 
+import './Footer.css';
+
 export const Footer = () => (
     <footer className="footer">
 
@@ -17,7 +19,7 @@ export const Footer = () => (
                     <p>
                         <a className="footer__link"
                            href="https://facebook.com">
-                            <i className="fab fa-facebook-f"></i>
+                            <i className="fab fa-facebook-f"/>
                         </a>
                     </p>
                 </li>

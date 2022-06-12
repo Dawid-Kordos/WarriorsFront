@@ -1,6 +1,8 @@
 import React, {ChangeEvent} from "react";
 import {WarriorEntity} from "../../types/WariorEntity";
 
+import './InputSelect.css';
+
 interface Props {
     warriors: WarriorEntity[] | null;
     name: string;

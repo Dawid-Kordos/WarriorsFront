@@ -7,6 +7,8 @@ import {AddForm} from "../views/AddForm";
 import {ListAllWarriors} from "../views/ListAllWarriors";
 import {NotFoundView} from "../views/NotFoundView";
 
+import './Main.css';
+
 export const Main = () => (
     <article className="article">
         <Routes>

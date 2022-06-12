@@ -5,6 +5,8 @@ import {WarriorsList} from "../components/Warriors/WarriorsList";
 import {DeleteConfirmation} from "./DeleteConfirmation";
 import {ErrorPage} from "./ErrorPage";
 
+import './ListAllWarriors.css';
+
 export const ListAllWarriors = () => {
     const [warriors, setWarriors] = useState<WarriorEntity[] | null>(null);
     const [removedWarriorId, setRemovedWarriorId] = useState<string | undefined>(undefined);

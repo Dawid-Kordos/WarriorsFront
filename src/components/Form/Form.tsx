@@ -3,6 +3,8 @@ import {InputText} from "../Input/InputText";
 import {InputNumber} from "../Input/InputNumber";
 import {RegistrationData} from "../../types/RegistrationData";
 
+import './Form.css';
+
 interface Props {
     data: RegistrationData;
     onSubmit: (e: FormEvent) => void;

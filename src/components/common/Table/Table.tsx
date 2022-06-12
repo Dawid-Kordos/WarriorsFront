@@ -1,6 +1,8 @@
 import React from "react";
 import {Row} from "./Row";
 
+import './Table.css';
+
 export const Table = () => {
     return (
         <table className="article__table">

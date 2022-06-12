@@ -1,6 +1,8 @@
 import React, {useContext} from "react";
 import {RegistrationDataContext} from "../../views/AddForm";
 
+import './InputNumber.css';
+
 interface Props {
     className: string;
     name: string;

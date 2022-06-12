@@ -1,0 +1,14 @@
+.article__table{
+    margin-top: 20px;
+}
+
+.article__table-row{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.article__table-column{
+    flex-basis: 33%;
+}

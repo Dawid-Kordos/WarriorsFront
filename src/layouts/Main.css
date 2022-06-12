@@ -1,0 +1,9 @@
+.article {
+    flex-basis: 80%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    background-image: url('../graphics/grey_wash_wall.png');
+    color: #000;
+}

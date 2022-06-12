@@ -1,5 +1,7 @@
 import React from "react";
 
+import './FightLog.css';
+
 interface Props {
     log: string[];
 }

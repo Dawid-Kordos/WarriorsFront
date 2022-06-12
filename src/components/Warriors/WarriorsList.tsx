@@ -2,10 +2,12 @@ import React, {FormEvent} from 'react';
 import {WarriorEntity} from "../../types/WariorEntity";
 import { Button } from '../common/Button/Button';
 
+import './WarriorsList.css';
+
 interface Props {
     warrior: WarriorEntity;
     onDelete: (e: FormEvent, id: string | undefined) => void;
-};
+}
 
 export const WarriorsList = (props: Props) => {
     return (

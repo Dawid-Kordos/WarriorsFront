@@ -1,6 +1,8 @@
 import React from "react";
 import logoTop from "../graphics/logo.jpg";
 
+import './Header.css';
+
 export const Header = () => (
     <header className="header">
 

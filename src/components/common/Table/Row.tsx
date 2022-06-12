@@ -1,6 +1,8 @@
 import React, {useContext} from "react";
 import {FamousWarriorsContext} from "../../../views/HallOfFame";
 
+import './Table.css';
+
 export const Row = () => {
     const context = useContext(FamousWarriorsContext);
     if (!context) return null;

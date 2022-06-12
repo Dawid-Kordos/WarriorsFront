@@ -1,0 +1,10 @@
+.article__title {
+    flex-basis: 10%;
+    text-align: center;
+    margin: 20px auto 20px;
+}
+
+.article__paragraph{
+    color: #4b0000;
+    text-align: center;
+}
